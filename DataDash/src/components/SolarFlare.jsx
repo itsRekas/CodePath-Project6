@@ -32,7 +32,7 @@ const SolarFlare = () => {
         const fetchMarsWeather = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://api.nasa.gov/insight_weather/?api_key=9XT66j6cBVXViFihlwILSrsofTXsmjOlMsEV0hXm&feedtype=json&ver=1.0`);
+                const response = await fetch(`https://api.nasa.gov/insight_weather/?api_key=YourKey&feedtype=json&ver=1.0`);
                 const data = await response.json();
                 setMarsWeather(data);
             } catch (error) {
