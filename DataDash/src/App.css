@@ -1,26 +1,31 @@
+/* Root styles */
 #root {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 2rem;
   text-align: center;
-  background-color: #333; 
+  background-color: #333;
   font-family: 'Arial', sans-serif;
-  color: #f0f4f8; 
+  color: #f0f4f8;
 }
 
+/* Logo styles */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Logo spin animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,6 +41,7 @@
   }
 }
 
+/* Card styles */
 .card {
   padding: 2em;
   background-color: #fff;
@@ -44,11 +50,13 @@
   margin-bottom: 1.5rem;
 }
 
+/* Read the docs style */
 .read-the-docs {
   color: #888;
   font-size: 0.9rem;
 }
 
+/* Dashboard styles */
 .dashboard {
   padding: 2rem;
 }
@@ -59,6 +67,7 @@
   margin-bottom: 1.5rem;
 }
 
+/* Catalog styles */
 .catalog {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -73,7 +82,7 @@
   transition: transform 0.3s ease;
 }
 
-.catalog div:hover {
+.dashboard .catalog div:hover {
   transform: translateY(-10px);
 }
 
@@ -96,6 +105,7 @@
   font-size: 0.9rem;
 }
 
+/* Summary styles */
 .summary {
   background-color: #fff;
   padding: 1.5rem;
@@ -113,6 +123,7 @@
   color: #444;
 }
 
+/* Controls styles */
 .controls {
   display: flex;
   justify-content: space-between;
@@ -137,4 +148,225 @@
 
 .controls select {
   margin-left: 1rem;
+}
+
+/* Navigation styles */
+.nav {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.nav-inner {
+  width: 80%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #333;
+}
+
+.nav-inner div {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+
+.nav-inner ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-inner li {
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+}
+
+li a,
+h1 a {
+  color: #f0f4f8;
+}
+
+/* Histogram styles */
+.histcat {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hist img {
+  width: 40%;
+}
+
+.hist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+/* SolarFlare Component Styles */
+.solar-flare-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d0d1a;
+  color: #e0e0e0;
+  padding: 40px;
+}
+
+.solar-flare-container h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #e0e0e0;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.chart-wrapper {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+}
+
+.chart-wrapper canvas {
+  max-height: 800px;
+}
+
+.solar-flare-info {
+  text-align: center;
+  font-size: 1.4rem;
+  color: #e0e0ff;
+  margin-top: 25px;
+  line-height: 1.5;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.solar-flare-container,
+.chart-wrapper,
+.solar-flare-info {
+  animation: fadeIn 1s ease-in;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-inner div {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dashboard h2 {
+    font-size: 1.8rem;
+  }
+
+  .catalog {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls input,
+  .controls select {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+
+  .solar-flare-container h2 {
+    font-size: 3rem;
+  }
+
+  .solar-flare-info {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.5em;
+  }
+
+  .catalog h3 {
+    font-size: 1rem;
+  }
+
+  .catalog p {
+    font-size: 0.8rem;
+  }
+
+  .solar-flare-container h2 {
+    font-size: 2.5rem;
+  }
+
+  .solar-flare-info {
+    font-size: 1rem;
+  }
+
+  .controls input,
+  .controls select {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-inner {
+    flex-direction: row;
+    justify-content: center;
+    font-size: x-small;
+    width: 100%;
+  }
+
+  .nav-inner div {
+    width: 100%;
+    justify-content: center;
+    padding: 1em;
+  }
+
+  .solar-flare-container h2 {
+    font-size: 2rem;
+  }
+
+  .solar-flare-info {
+    font-size: 0.9rem;
+  }
 }

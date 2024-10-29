@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import DashBoard from './components/DashBoard';
+import { Route,Routes,useSearchParams} from 'react-router-dom';
+import NavBar from './components/NavBar';
+import SolarFlare from './components/SolarFlare';
+import History from './components/History';
+import PictureComponent from './components/Picture';
 
 function App() {
+  const [history,setHistory]=useState([]);
   const [dashBoardData, setDashBoardData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
-  const [itemCount, setItemCount] = useState(10);
+  const [params,setParams] = useSearchParams({n: 10})
+  const [itemCount, setItemCount] = useState(params.get("n"));
   const [errorMessage, setErrorMessage] = useState(''); 
 
 
@@ -15,9 +22,12 @@ function App() {
       if (itemCount > 0) {
         setErrorMessage('');
         try {
-          const response = await fetch(`https://api.nasa.gov/planetary/apod?count=${itemCount}&thumbs=true&api_key=lXUWD7fdnlR8Jigje2V0gAUAC8FpkDucFqdqrN57`);
+          const response = await fetch(`https://api.nasa.gov/planetary/apod?count=${itemCount}&thumbs=true&api_key=dKqXO4MSygRAVEPit67IgDlwRaPoQs8OONRzpWWc
+`);
           const data = await response.json();
           setDashBoardData(data);
+          setHistory([...history, ...data]);
+          console.log(data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -40,44 +50,18 @@ function App() {
     .filter(item => (filterType === 'all') || item.media_type === filterType);
 
   return (
-    <div className='cover'>
-      <h1>Dashboard</h1>
-
-      <div className="summary">
-        <p>Total Items: {totalItems}</p>
-        <p>Total Images: {totalImages}</p>
-        <p>Total Videos: {totalVideos}</p>
-      </div>
-
-      <div className="controls">
-        <input 
-          type="text" 
-          placeholder="Search by title" 
-          value={searchTerm} 
-          onChange={(e) => setSearchTerm(e.target.value)} 
-        />
-        <select onChange={(e) => setFilterType(e.target.value)}>
-          <option value="all">All</option>
-          <option value="image">Images</option>
-          <option value="video">Videos</option>
-        </select>
-      </div>
-
-      <div className="controls">
-        <label htmlFor="itemCount">Number of Items: </label>
-        <input 
-          type="number" 
-          id="itemCount" 
-          min="0" 
-          value={itemCount} 
-          onChange={(e) => setItemCount(Number(e.target.value))}
-        />
-      </div>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <DashBoard dashBoard={filteredData} />
-    </div>
+    <>
+      <NavBar/>
+      <Routes>
+        <Route path='/' element={<DashBoard dashBoard={filteredData} totalImages={totalImages} totalItems={totalItems} totalVideos={totalVideos} searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm} filterType={filterType} setFilterType={setFilterType} itemCount={itemCount} setItemCount={setItemCount} errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage} setParams={setParams}/>}/>
+        <Route path='/Mars'element={<SolarFlare/>}/>
+        <Route path='/History'element={<History history={history} setHistory={setHistory}/>}/>
+        <Route path={`picture/:id`} element={<PictureComponent dashBoardData={dashBoardData}/>}/>
+        <Route path='*' element={"NotFound"}/>
+      </Routes>
+    </>
   );
 }
 
